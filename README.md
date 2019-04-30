@@ -23,4 +23,4 @@ The objective is to find the person who is the Merchant. But you have to follow 
 
 This is a simple solution to understand how genetic algorithm works. Sometimes we can get to the answer and other times we can't. It depends on the hyper-parameters and the random initialization (and maybe some mistakes I have made or not hehe).
 
-##Good luck! 
+## Good luck! 
