@@ -1,5 +1,7 @@
 import random
-
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
 from flow.chromosome import Chromosome
 from flow.crossover import SimpleCrossOver
 from flow.mutation import SimpleMutation
@@ -7,17 +9,31 @@ from flow.selectors import RandomSelection, RankingSelection
 
 random.seed(42)  # To reproduce a random (for testing)
 
-# Hyper-parameters
+# Number of possible solutions
 n_chromosomes = 100
 
 
-# ¿Who is the merchant? ¿Juan, Omar, Antonella, Santiago or Sonia?
+# Main Problem: ¿Who is the merchant? ¿Juan, Omar, Antonella, Santiago or Sonia?
 
 def generate_chromosomes():
     chromosomes = []
     for number in range(n_chromosomes):
         chromosomes.append(Chromosome())
     return chromosomes
+
+
+def plot(aptitudes):
+    records = []
+    for idx, aptitude in enumerate(aptitudes):
+        records.append(
+            {
+                'iteration': idx,
+                'aptitude': aptitude
+            }
+        )
+    df = pd.DataFrame.from_records(records)
+    sns.lineplot(x="iteration", y="aptitude", data=df)
+    plt.show()
 
 
 # Tools
@@ -39,7 +55,8 @@ def main():
     population = generate_chromosomes()
     print("Population size:", len(population))
     best_aptitude = max(map(lambda c: c.aptitude(), population))
-    iter = 0
+    iterations = 0
+    aptitudes = list([best_aptitude])
     while best_aptitude < 15:
         print("Best aptitude:", best_aptitude)
         population.sort(key=lambda chromosome: chromosome.aptitude(), reverse=True)
@@ -57,8 +74,9 @@ def main():
         population = mutations['simple'].mutate(new_population) + selected
 
         best_aptitude = max(map(lambda c: c.aptitude(), population))
-        print("------------------------------- End of iteration", iter)
-        iter += 1
+        aptitudes.append(best_aptitude)
+        print("------------------------------- End of iteration", iterations)
+        iterations += 1
 
     population.sort(key=lambda chromosome: chromosome.aptitude(), reverse=True)
     print("*******************************")
@@ -69,6 +87,8 @@ def main():
     print("**")
     print("***")
     print(">>> Artificial Intelligence baby ;) <<<")
+
+    plot(aptitudes)
 
 
 if __name__ == '__main__':

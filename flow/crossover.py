@@ -8,7 +8,7 @@ class SimpleCrossOver:
 
     @staticmethod
     def cross_over(chromosomes):
-        cut = 3  # Cannot be higher than 5
+        cut = 3  # Cannot be higher than 5 (max of person's characteristics)
         children = []
         for mother, father in pairwise(map(lambda c: c.people, chromosomes)):
             child_m = Chromosome(copy.deepcopy(mother[:cut] + father[cut:]))
