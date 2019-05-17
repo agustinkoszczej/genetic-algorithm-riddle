@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 import random
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 from flow.chromosome import Chromosome
-from flow.crossover import SimpleCrossOver
+from flow.crossover import SimpleCrossOver, ComplementBinomialCrossOver, DoubleBinomialCrossOver
 from flow.mutation import SimpleMutation
 from flow.selectors import RandomSelection, RankingSelection
 
@@ -43,7 +44,9 @@ selectors = {
 }
 
 cross_overs = {
-    "simple": SimpleCrossOver()
+    "simple": SimpleCrossOver(),
+    "complement_binomial": ComplementBinomialCrossOver(),
+    "double_binomial": DoubleBinomialCrossOver()
 }
 
 mutations = {
@@ -68,7 +71,7 @@ def main():
         selected = selectors['ranking'].select(population)
 
         # 2 - Cross Over
-        new_population = cross_overs['simple'].cross_over(selected)
+        new_population = cross_overs['complement_binomial'].cross_over(selected)
 
         # 3 - Mutation
         population = mutations['simple'].mutate(new_population) + selected
