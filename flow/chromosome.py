@@ -18,7 +18,7 @@ class Chromosome:
         return custom_people
 
     def aptitude(self):
-        return sum(self.calculate_points()) - self.penalization() + self.penalization()
+        return sum(self.calculate_points()) - self.penalization()
 
     def mutate(self):
         self.people[np.random.randint(0, x_dim)].mutate()

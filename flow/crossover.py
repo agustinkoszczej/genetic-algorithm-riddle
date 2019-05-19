@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import copy
 import itertools
-import random
 from flow.chromosome import Chromosome
 
 

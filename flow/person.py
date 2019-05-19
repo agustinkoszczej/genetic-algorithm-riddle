@@ -8,7 +8,7 @@ people = ["Juan", "Omar", "Antonella", "Santiago", "Sonia"]
 professions = ["Accountant", "Police", "Professor", "Merchant", "Engineer"]
 vehicles = ["Motorbike", "Car", "Van", "Bicycle", "Bus"]
 checkins = [Decimal(7), Decimal(7.50), Decimal(8), Decimal(8.50), Decimal(9)]
-watching = ["Comedy", "Novel", "Movies", "Soccer", "Series"]
+watchings = ["Comedy", "Novel", "Movies", "Soccer", "Series"]
 
 
 class Person:
@@ -17,7 +17,7 @@ class Person:
         self.profession = professions[np.random.randint(0, x_dim)]
         self.vehicle = vehicles[np.random.randint(0, x_dim)]
         self.checkin = checkins[np.random.randint(0, x_dim)]
-        self.watching = watching[np.random.randint(0, x_dim)]
+        self.watching = watchings[np.random.randint(0, x_dim)]
 
     def description(self):
         return [self.name, self.profession, self.vehicle, self.checkin, self.watching]
