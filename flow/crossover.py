@@ -38,19 +38,15 @@ class DoubleBinomialCrossOver:
     @staticmethod
     def cross_over(chromosomes):
         mask_child_a = [0,1,1,0,1] #[random.choice([0,1]) for i in range(5)]  # This is the mask defining child A (1: coming from M, 0: coming from F)
-        mask_child_b = [1,1,0,0,1]#[random.choice([0,1]) for i in range(5)]  # This is the mask defining child B (1: coming from M, 0: coming from F)
+        mask_child_b = [1,1,0,0,1] #[random.choice([0,1]) for i in range(5)]  # This is the mask defining child B (1: coming from M, 0: coming from F)
         children = []
         for mother, father in pairwise(map(lambda c: c.people, chromosomes)):
-
             child_a = Chromosome(copy.deepcopy([mother[i] if gen else father[i] for i, gen in enumerate(mask_child_a)])) 
             child_b = Chromosome(copy.deepcopy([mother[i] if gen else father[i] for i, gen in enumerate(mask_child_b)])) 
-
             children.append(child_a)
             children.append(child_b)
 
         return children
-
-# TODO: Other crossover methods
 
 def pairwise(iterable):
     a, b = itertools.tee(iterable)

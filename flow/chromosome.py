@@ -18,7 +18,7 @@ class Chromosome:
         return custom_people
 
     def aptitude(self):
-        return sum(self.calculate_points())
+        return sum(self.calculate_points()) - self.penalization() + self.penalization()
 
     def mutate(self):
         self.people[np.random.randint(0, x_dim)].mutate()
@@ -31,6 +31,22 @@ class Chromosome:
             , self.rule_thirteen(), self.rule_fourteen(), self.rule_fifteen()
         ]
         return points
+
+    def penalization(self):
+        names = list(map(lambda person: person.name, self.people))
+        professions = list(map(lambda person: person.profession, self.people))
+        vehicles = list(map(lambda person: person.vehicle, self.people))
+        checkins = list(map(lambda person: person.checkin, self.people))
+        watchings = list(map(lambda person: person.watching, self.people))
+
+        names_penalization = 0 if len(names) == len(set(names)) else 1
+        professions_penalization = 0 if len(professions) == len(set(professions)) else 1
+        vehicles_penalization = 0 if len(vehicles) == len(set(vehicles)) else 1
+        checkins_penalization = 0 if len(checkins) == len(set(checkins)) else 1
+        watchings_penalization = 0 if len(watchings) == len(set(watchings)) else 1
+
+        return names_penalization + professions_penalization + \
+               vehicles_penalization + checkins_penalization + watchings_penalization
 
     def describe_points(self):
         print(self.calculate_points())
