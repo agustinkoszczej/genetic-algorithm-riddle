@@ -11,5 +11,3 @@ class SimpleMutation:
             if random.random() < mutation_rate:
                 chromosome.mutate()
         return chromosomes
-
-# TODO: Other mutation methods

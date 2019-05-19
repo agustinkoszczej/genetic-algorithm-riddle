@@ -6,7 +6,7 @@ import pandas as pd
 from flow.chromosome import Chromosome
 from flow.crossover import SimpleCrossOver, ComplementBinomialCrossOver, DoubleBinomialCrossOver
 from flow.mutation import SimpleMutation
-from flow.selectors import RandomSelection, RankingSelection
+from flow.selectors import RandomSelection, RankingSelection, TournamentSelection
 
 random.seed(42)  # To reproduce a random (for testing)
 
@@ -41,6 +41,7 @@ def plot(aptitudes):
 selectors = {
     "random": RandomSelection(),
     "ranking": RankingSelection(),
+    "tournament": TournamentSelection(),
 }
 
 cross_overs = {
